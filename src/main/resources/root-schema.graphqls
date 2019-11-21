@@ -9,3 +9,8 @@ type Mutation {
 type GraphQLIOSubscription {
 	subscribe:String
 }
+
+
+scalar UUID
+
+scalar Date

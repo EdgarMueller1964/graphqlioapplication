@@ -8,4 +8,6 @@ type Route {
 	departure: String
 	destination: String
 	disabled: Boolean
+	signature: UUID
+	bookingDate: Date
 }

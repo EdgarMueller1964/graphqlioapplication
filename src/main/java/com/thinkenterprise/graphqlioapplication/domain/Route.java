@@ -1,5 +1,8 @@
 package com.thinkenterprise.graphqlioapplication.domain;
 
+import java.sql.Date;
+import java.util.UUID;
+
 import javax.persistence.*;
 
 
@@ -10,6 +13,8 @@ public class Route extends AbstractEntity {
     private String departure;
     private String destination;
     private String disabled = "FALSE";
+    private UUID signature = null;
+    private Date bookingDate = null;
 
 //    private LocalTime departureTime;
 //    private LocalTime arrivalTime;
@@ -73,6 +78,22 @@ public class Route extends AbstractEntity {
         this.disabled = disabled;
     }  
     
+    public UUID getSignature() {
+        return signature;
+    }
+
+    public void setSignature(UUID signature) {
+        this.signature = signature;
+    }  
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }  
+
 //
 //    public void addFlight(Flight flight) {
 //        flights.add(flight);
