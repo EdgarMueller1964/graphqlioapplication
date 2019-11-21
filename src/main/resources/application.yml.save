@@ -1,0 +1,33 @@
+erver:
+  port: 8080
+
+
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+        
+graphqlio:  
+  server:
+    schemaLocationPattern: "**/*.graphqls"
+  websocketframed:
+    endpoint: /api/data/graph
+
+## Database Configuration 
+spring:
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+# H2 Settings 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Data Source Settings 
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE 
+    platform: h2
