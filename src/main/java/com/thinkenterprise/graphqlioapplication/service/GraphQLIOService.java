@@ -1,31 +1,25 @@
 package com.thinkenterprise.graphqlioapplication.service;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
-import com.thinkenterprise.graphqlio.server.gs.graphql.GsGraphQLService;
+import com.thinkenterprise.graphqlio.server.gs.server.GsServer;
 
 @Service
-public class GraphQLIOService {   /// ApplicationRunner????
+public class GraphQLIOService implements ApplicationRunner {
 	
 	
-	//// GsServer holen, statt GraphQLService
-	//// GsServer.start
+	private GsServer graphqlioServer;
 	
-	private GsGraphQLService gsGraphQlService;
-	
-	GraphQLIOService(GsGraphQLService gsGraphQlService){
-		this.gsGraphQlService = gsGraphQlService;
+	GraphQLIOService(GsServer graphqlioServer){
+		this.graphqlioServer = graphqlioServer;
 	}
 
-	
-	@PostConstruct
-	void initialize() {
-  	////   add schema
-		gsGraphQlService.start();    	
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		this.graphqlioServer.start();
+		
 	}
-	
 	
 }
