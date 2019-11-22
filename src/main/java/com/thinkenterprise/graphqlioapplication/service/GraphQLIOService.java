@@ -2,13 +2,17 @@ package com.thinkenterprise.graphqlioapplication.service;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import com.thinkenterprise.graphqlio.server.gs.graphql.GsGraphQLService;
 
 @Service
-public class GraphQLIOService {
+public class GraphQLIOService {   /// ApplicationRunner????
 	
+	
+	//// GsServer holen, statt GraphQLService
+	//// GsServer.start
 	
 	private GsGraphQLService gsGraphQlService;
 	

@@ -1,5 +1,13 @@
-extend type Query {
+schema {
+   query: Query
+   mutation: Mutation
+}
+
+type Query {
 	routes:[Route]
+}
+
+type Mutation{
 }
 
 type Route {
