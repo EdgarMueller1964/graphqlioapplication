@@ -9,14 +9,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.thinkenterprise.graphqlio.server.gs.keyvaluestore.GsGraphQLRedisService;
+import com.thinkenterprise.graphqlio.server.gts.keyvaluestore.GtsGraphQLRedisService;
 
 @Profile("test")
 @Service
 public class GraphQLIORedisService implements ApplicationRunner, DisposableBean {
 
 	@Autowired
-	private GsGraphQLRedisService graphQLRedisService;
+	private GtsGraphQLRedisService graphQLRedisService;
 
 	public GraphQLIORedisService() {
 	}
