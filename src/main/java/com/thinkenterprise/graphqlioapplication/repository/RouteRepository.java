@@ -42,4 +42,8 @@ public interface RouteRepository extends CrudRepository<Route, Long> {
 
     @Query(value = "SELECT * FROM ROUTE WHERE FLIGHT_NUMBER = ?1", nativeQuery = true)
     Iterable<Route> findByFlightNumber(@Param("flightNumber") String flightNumber);
+
+    @Query(value = "SELECT * FROM ROUTE WHERE FLIGHT_NUMBER = ?1", nativeQuery = true)
+    Route getByFlightNumber(@Param("flightNumber") String flightNumber);
+    
 }
