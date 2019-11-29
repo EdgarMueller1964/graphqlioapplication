@@ -9,11 +9,21 @@ type Query {
 
 type Mutation {
 	updateRoute( flightNumber:String!, input: UpdateRouteInput!): Route
+	createRoute(input: CreateRouteInput!): Route
 }
 
 
 input UpdateRouteInput {
 	flightNumber: String!
+	departure: String
+	destination: String
+	disabled: Boolean
+	signature: UUID
+	bookingDate: Date
+}
+
+input CreateRouteInput {
+	flightNumber: String
 	departure: String
 	destination: String
 	disabled: Boolean

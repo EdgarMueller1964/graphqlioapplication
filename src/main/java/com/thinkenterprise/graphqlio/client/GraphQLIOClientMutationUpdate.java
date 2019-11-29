@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.web.socket.TextMessage;
 
-public class GraphQLIOClientMutation {
+public class GraphQLIOClientMutationUpdate {
 
 	public static void main(String[] args) {
 		final String mutationQuery = "[1,0,\"GRAPHQL-REQUEST\",mutation { updateRoute(flightNumber: \"LH7902\" "

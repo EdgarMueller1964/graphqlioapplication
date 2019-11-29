@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.thinkenterprise.graphqlio.server.gts.context.GtsContext;
 import com.thinkenterprise.graphqlio.server.gts.tracking.GtsRecord;
-import com.thinkenterprise.graphqlio.server.gts.tracking.GtsScope;
 import com.thinkenterprise.graphqlio.server.gts.tracking.GtsRecord.GtsArityType;
 import com.thinkenterprise.graphqlio.server.gts.tracking.GtsRecord.GtsOperationType;
+import com.thinkenterprise.graphqlio.server.gts.tracking.GtsScope;
 import com.thinkenterprise.graphqlioapplication.domain.Route;
+import com.thinkenterprise.graphqlioapplication.domain.mutationinput.CreateRouteInput;
 import com.thinkenterprise.graphqlioapplication.domain.mutationinput.UpdateRouteInput;
 import com.thinkenterprise.graphqlioapplication.repository.RouteRepository;
 
@@ -52,10 +53,10 @@ public class MutationResolver implements GraphQLMutationResolver {
 		return modifiedRoute;
 	}
 
-//	@Transactional
-//	public Route createRoute(CreateRouteInput input) {
-//		return routeRepository.save(input.toRoute());
-//	}
+	@Transactional
+	public Route createRoute(CreateRouteInput input) {
+		return routeRepository.save(input.toRoute());
+	}
 //	public Long deleteRoute(String flightNumber) {
 //		routeRepository.delete((Route) routeRepository.findByFlightNumber(flightNumber));
 //	return 1L;
