@@ -27,22 +27,28 @@ public class RouteResolver implements GraphQLQueryResolver {
 
 	public List<Route> routes(DataFetchingEnvironment env) {
 		
+		Iterable<Route> allRoutes = routeRepository.findAll();
+
+		List<Route> allRoutesList = new ArrayList<>();
+		allRoutes.forEach(allRoutesList::add);
+		
+		List<String> dstIds = new ArrayList<>();
+		if (!allRoutesList.isEmpty()) {
+			allRoutesList.forEach(route -> dstIds.add(route.getId().toString()));
+		}
+		else
+			dstIds.add("*");
+		
 //      ctx.scope.record({ op: "read", arity: "all", dstType: "Item", dstIds: result.map((item) => item.id), dstAttrs: attr })
-    	
-    	GtsContext context = env.getContext();
+   	   	GtsContext context = env.getContext();
     	GtsScope scope = context.getScope();
 		scope.addRecord(GtsRecord.builder()
     		.op(GtsOperationType.READ)
     		.arity(GtsArityType.ALL)
-    		.dstType("Route")
-    		.dstIds(new String[] {"*"})
+    		.dstType(Route.class.getName())
+    		.dstIds(dstIds.toArray(new String[dstIds.size()]))
     		.dstAttrs(new String[] {"*"})
     		.build());
-		
-		Iterable<Route> allUsers = routeRepository.findAll();
-
-		List<Route> allRoutesList = new ArrayList<>();
-		allUsers.forEach(allRoutesList::add);
 		return allRoutesList;
 	}
 }
