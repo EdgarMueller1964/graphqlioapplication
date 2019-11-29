@@ -59,4 +59,20 @@ public class GraphQLIOClient {
 		}
 	}
 
+	public void runQuery(AbstractWebSocketMessage message) {
+		try {
+			WebSocketClient webSocketClient = new StandardWebSocketClient();
+			WebSocketSession webSocketSession = webSocketClient.doHandshake(new StandardClientTextWebSocketHandler(),
+					new WebSocketHttpHeaders(), URI.create("ws://127.0.0.1:8080/api/data/graph")).get();
+
+			webSocketSession.sendMessage(message);
+			// Wartezeit 60 sec
+			Thread.sleep(60000);
+
+			webSocketSession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
