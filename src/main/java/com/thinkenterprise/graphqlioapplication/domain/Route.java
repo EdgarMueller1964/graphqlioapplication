@@ -39,6 +39,12 @@ public class Route extends AbstractEntity {
         this.flightNumber = flightNumber;
     }
 
+    public Route(String flightNumber, String departure, String destination) {
+        super();
+        this.flightNumber = flightNumber;
+        this.destination = destination;
+        this.departure = departure;
+    }
     public Route(String flightNumber, String departure, String destination,String disabled, UUID signature,Date bookingDate) {
         super();
         this.flightNumber = flightNumber;
@@ -48,7 +54,6 @@ public class Route extends AbstractEntity {
         this.signature = signature;
         this.bookingDate = bookingDate;
     }
-
     public String getDeparture() {
         return departure;
     }
