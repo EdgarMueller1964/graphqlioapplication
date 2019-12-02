@@ -103,9 +103,13 @@ public class GraphQLIOClientNotification extends Thread {
 					new WebSocketHttpHeaders(), URI.create("ws://127.0.0.1:8080/api/data/graph")).get();
 
 			for (AbstractWebSocketMessage message : messages) {
+				// Wartezeit 2 sec
+				Thread.sleep(2000);
+
 				webSocketSession.sendMessage(message);
-				// Wartezeit 9 sec
-				Thread.sleep(9000);
+
+				// Wartezeit 7 sec
+				Thread.sleep(7000);
 			}
 
 			webSocketSession.close();
