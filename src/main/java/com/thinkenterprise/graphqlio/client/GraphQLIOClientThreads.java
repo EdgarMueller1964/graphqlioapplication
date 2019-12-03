@@ -1,15 +1,11 @@
 package com.thinkenterprise.graphqlio.client;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.TextMessage;
 
-import co.nstant.in.cbor.CborEncoder;
-import co.nstant.in.cbor.model.ByteString;
-import co.nstant.in.cbor.model.DataItem;
+import com.thinkenterprise.graphqlio.server.gs.handler.GsWebSocketHandler;
 
 public class GraphQLIOClientThreads extends Thread {
 
@@ -109,16 +105,13 @@ public class GraphQLIOClientThreads extends Thread {
 
 	private void runBinary() {
 		try {
-			byte[] bytes = "[1,0,\"GRAPHQL-REQUEST\",query { routes { id } } ]".getBytes();
-			DataItem dataItem = new ByteString(bytes);
-
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			new CborEncoder(os).encode(dataItem);
+			String simpleQuery = "[1,0,\"GRAPHQL-REQUEST\",query { routes { id } } ]";
 
 			List list = new ArrayList<>();
-			list.add(new BinaryMessage(os.toByteArray()));
+			list.add(GsWebSocketHandler.createFromStringCbor(simpleQuery));
 
-			new GraphQLIOClient().runQueries(list, 500, 4500);
+			new GraphQLIOClient().runQueries(list, new WebSocketHandlerCbor(), GsWebSocketHandler.SUB_PROTOCOL_CBOR,
+					500, 4500);
 
 		} catch (Exception e) {
 			e.printStackTrace();

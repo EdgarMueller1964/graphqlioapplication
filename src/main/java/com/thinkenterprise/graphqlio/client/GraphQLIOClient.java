@@ -2,11 +2,13 @@ package com.thinkenterprise.graphqlio.client;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.web.socket.AbstractWebSocketMessage;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.WebSocketClient;
@@ -28,6 +30,11 @@ public class GraphQLIOClient {
 	}
 
 	public void runQueries(List<AbstractWebSocketMessage> message, Integer... b) {
+		this.runQueries(message, null, null, b);
+	}
+
+	public void runQueries(List<AbstractWebSocketMessage> message, WebSocketHandler webSocketHandler, String protocol,
+			Integer... b) {
 		try {
 			// min in [500..4999]
 			Integer min = b.length > 0 ? b[0] : 4999;
@@ -43,9 +50,18 @@ public class GraphQLIOClient {
 			else if (max > 5000 - min)
 				max = 5000 - min;
 
+			if (webSocketHandler == null) {
+				webSocketHandler = new StandardClientTextWebSocketHandler();
+			}
+
+			WebSocketHttpHeaders headers = new WebSocketHttpHeaders();
+			if (protocol != null) {
+				headers.setSecWebSocketProtocol(Arrays.asList(protocol));
+			}
+
 			WebSocketClient webSocketClient = new StandardWebSocketClient();
-			WebSocketSession webSocketSession = webSocketClient.doHandshake(new StandardClientTextWebSocketHandler(),
-					new WebSocketHttpHeaders(), URI.create("ws://127.0.0.1:8080/api/data/graph")).get();
+			WebSocketSession webSocketSession = webSocketClient
+					.doHandshake(webSocketHandler, headers, URI.create("ws://127.0.0.1:8080/api/data/graph")).get();
 			int i = 0;
 			while (i++ < 10) {
 				webSocketSession.sendMessage(message.get(RAND.nextInt(message.size())));
