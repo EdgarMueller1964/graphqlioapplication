@@ -81,12 +81,12 @@ public class GraphQLIOClientNotification extends Thread {
 
 			messages = new ArrayList<AbstractWebSocketMessage>();
 
-			String unsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",query { _Subscription { unsubscribe ( "
-					+ subscriptionIds.get(0) + " ) } routes { id } } ]";
+			String unsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",mutation { _Subscription { unsubscribe ( sid: \""
+					+ subscriptionIds.get(0) + "\" ) } } ]";
 			messages.add(new TextMessage(unsubscriptionQuery));
 
-			unsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",query { _Subscription { unsubscribe ( "
-					+ subscriptionIds.get(1) + " ) } routes { id } } ]";
+			unsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",mutation { _Subscription { unsubscribe ( sid: \""
+					+ subscriptionIds.get(1) + "\" ) } } ]";
 			messages.add(new TextMessage(unsubscriptionQuery));
 
 			// Un-Subscriptions:
@@ -173,9 +173,10 @@ public class GraphQLIOClientNotification extends Thread {
 			String payload = message.getPayload();
 			int pos_gql = payload.indexOf("GRAPHQL-RESPONSE");
 			int pos_sub = payload.indexOf("_Subscription");
-			int pos = payload.indexOf("subscribe");
+			int pos = payload.indexOf("\"subscribe");
 			if (pos_gql > 0 && pos_sub > 0 && pos > 0) {
-				payload = payload.substring(pos - 2, payload.indexOf("}", pos) + 1);
+				payload = payload.substring(pos - 1, payload.indexOf("}", pos) + 1);
+				System.out.println("LocalWebSocketHandler::payload = " + payload);
 				JSONObject json = new JSONObject(payload);
 				String subscriptionId = json.getString("subscribe");
 				this.subscriptionIds.add(subscriptionId);
