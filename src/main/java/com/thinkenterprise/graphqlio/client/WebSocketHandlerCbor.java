@@ -17,7 +17,7 @@ public class WebSocketHandlerCbor extends BinaryWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("connection esablished  : " + session.getId());
+		System.out.println("connection established  : " + session.getId());
 	}
 
 }

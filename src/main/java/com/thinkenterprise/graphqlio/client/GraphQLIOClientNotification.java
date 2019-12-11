@@ -85,10 +85,16 @@ public class GraphQLIOClientNotification extends Thread {
 					+ subscriptionIds.get(0) + "\" ) } } ]";
 			messages.add(new TextMessage(unsubscriptionQuery));
 
+			///  query/unsubscribe  not valid --> server will return error message expecting mutation/unsubscribe
+			String invalidUnsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",query { _Subscription { unsubscribe ( sid: \""
+					+ subscriptionIds.get(1) + "\" ) } } ]";
+			messages.add(new TextMessage(invalidUnsubscriptionQuery));
+
 			unsubscriptionQuery = "[1,0,\"GRAPHQL-REQUEST\",mutation { _Subscription { unsubscribe ( sid: \""
 					+ subscriptionIds.get(1) + "\" ) } } ]";
 			messages.add(new TextMessage(unsubscriptionQuery));
-
+			
+			
 			// Un-Subscriptions:
 			for (AbstractWebSocketMessage message : messages) {
 				webSocketSession.sendMessage(message);
@@ -186,7 +192,7 @@ public class GraphQLIOClientNotification extends Thread {
 
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-			System.out.println("LocalWebSocketHandler::connection esablished  : " + session.getId());
+			System.out.println("LocalWebSocketHandler::connection established  : " + session.getId());
 		}
 
 	}

@@ -33,25 +33,25 @@
 		<dependency>
 			<groupId>com.thinkenterprise.graphqlio.server.gs</groupId>
 			<artifactId>com.thinkenterprise.graphqlio.server.gs</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.thinkenterprise.graphqlio.server.gtt</groupId>
 			<artifactId>com.thinkenterprise.graphqlio.server.gtt</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.thinkenterprise.graphqlio.server.gts</groupId>
 			<artifactId>com.thinkenterprise.graphqlio.server.gts</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.thinkenterprise.graphqlio.server.wsf</groupId>
 			<artifactId>com.thinkenterprise.graphqlio.server.wsf</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 
@@ -92,9 +92,9 @@
 
 		<!-- JSON -->
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20190722</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20190722</version>
 		</dependency>
 
 		<!-- JSON Jackson -->
